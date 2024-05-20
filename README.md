@@ -41,6 +41,7 @@ StockTriad-Analytics is a Django web application for comprehensive stock analysi
 ## Setting Up Alpha Vantage and Polygon APIs
 - Alpha Vantage: [Sign up here](https://www.alphavantage.co/support/#api-key) to get your free API key.
 - Polygon: [Sign up here](https://polygon.io/dashboard/login) to get your API key.
+
 Paste your API Keys in [views.py](stock_analysis_project/stocks/views.py)
    
 ## Additional Resources

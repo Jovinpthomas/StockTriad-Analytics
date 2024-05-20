@@ -1,0 +1,116 @@
+<!-- stocks/templates/stocks/holders.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>Major Holders</h3>
+            <div class = 'company-details'>
+                {% if major_holders_table is not None and not major_holders_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in major_holders_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in major_holders_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No data available for major holders</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Direct Holders</h3>
+            <div class = 'company-details'>
+                {% if direct_holders_table is not None and not direct_holders_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in direct_holders_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in direct_holders_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No data available for direct holders</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Top Institutional Holders</h3>
+            <div class = 'company-details'>
+                {% if institutional_holders_table is not None and not institutional_holders_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in institutional_holders_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in institutional_holders_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No data available for institutional holders</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

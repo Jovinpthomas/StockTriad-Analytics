@@ -1,0 +1,158 @@
+<!-- stocks/templates/stocks/analysts.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>Analyst Recommendations</h3>
+            <div class="company-details">
+                <p><span class="info-label8">Number of Analyst Opinions:</span> <span class="info-value">{{ analyst_recommendations.number_of_analyst_opinions }}</span></p>
+                <p><span class="info-label8">Recommendation Mean:</span> <span class="info-value">{{ analyst_recommendations.recommendation_mean }}</span></p>
+                <p><span class="info-label8">Recommendation Key:</span> <span class="info-value">{{ analyst_recommendations.recommendation_key }}</span></p>
+                <p><span class="info-label8">Target Mean Price:</span> <span class="info-value">{{ analyst_recommendations.target_mean_price }}</span></p>
+                <p><span class="info-label8">Target High Price:</span> <span class="info-value">{{ analyst_recommendations.target_high_price }}</span></p>
+                <p><span class="info-label8">Target Low Price:</span> <span class="info-value">{{ analyst_recommendations.target_low_price }}</span></p>
+                <p><span class="info-label8">Target Median Price:</span> <span class="info-value">{{ analyst_recommendations.target_median_price }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Stock Recommendations Chart</h3>
+            <div class="company-details">
+                {% if plot1_html %}
+                <div class="plot-container">
+                    {{ plot1_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Earnings Calendar</h3>
+            <div class = 'company-details'>
+                {% if earnings_table is not None and not earnings_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in earnings_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in earnings_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No earnings available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Financials - Balance Sheet</h3>
+            <div class="company-details">
+                <div class="header4">
+                    <form id="financials-form-chart" method="post" action="{% url 'analysts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="financials-balance-sheet">
+                        <button type="submit" class="annual-button" name="action" value="annual">Annual</button>
+                        <button type="submit" class="quarterly-button" name="action" value="quarterly">Quarterly</button>
+                    </form>
+                </div>
+                
+                {% if plot2_html %}
+                <div class="plot-container">
+                    {{ plot2_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Financials - Income Statement</h3>
+            <div class="company-details">
+                <div class="header5">
+                    <form id="financials-form-chart" method="post" action="{% url 'analysts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="financials-income-statement">
+                        <button type="submit" class="annual-button" name="action" value="annual">Annual</button>
+                        <button type="submit" class="quarterly-button" name="action" value="quarterly">Quarterly</button>
+                    </form>
+                </div>
+                
+                {% if plot3_html %}
+                <div class="plot-container">
+                    {{ plot3_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Financials - Cash Flow</h3>
+            <div class="company-details">
+                <div class="header6">
+                    <form id="financials-form-chart" method="post" action="{% url 'analysts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="financials-cashflow">
+                        <button type="submit" class="annual-button" name="action" value="annual">Annual</button>
+                        <button type="submit" class="quarterly-button" name="action" value="quarterly">Quarterly</button>
+                    </form>
+                </div>
+                
+                {% if plot4_html %}
+                <div class="plot-container">
+                    {{ plot4_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

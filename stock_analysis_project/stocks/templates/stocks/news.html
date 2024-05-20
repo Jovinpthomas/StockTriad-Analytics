@@ -1,0 +1,58 @@
+<!-- stocks/templates/stocks/news.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>News</h3>
+            {% if news_df is not None and not news_df.empty %}
+                {% for index, row in news_df.iterrows %}
+                <div class="news-details">
+                    <p><span class="info-label9">Article No:</span> <span class="info-value">{{ index|add:1 }}</span></p>
+                    <div class="desc-container">
+                        <span class="desc-label2">Article Title:</span>
+                        <span class="desc-value">{{ row.Article_Title }}</span>
+                    </div>
+                    <p><span class="info-label9">Article Link:</span> <span class="info-value"><a href="{{ row.Article_URL }}">Read Article</a></span></p>
+                    <p><span class="info-label9">Sentiment Score:</span> <span class="info-value">{{ row.Sentiment_Score }}</span></p>
+                    {% if row.Sentiment == 'positive' %}
+                        <p><span class="info-label9">Sentiment:</span> <span class="info-value2 positive">Positive</span></p>
+                    {% elif row.Sentiment == 'negative' %}
+                        <p><span class="info-label9">Sentiment:</span> <span class="info-value2 negative">Negative</span></p>
+                    {% elif row.Sentiment == 'neutral' %}
+                        <p><span class="info-label9">Sentiment:</span> <span class="info-value2 neutral">Neutral</span></p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No news articles available</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

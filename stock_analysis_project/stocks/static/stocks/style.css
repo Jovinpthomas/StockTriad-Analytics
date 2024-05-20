@@ -1,0 +1,457 @@
+/* stocks/static/stocks/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #142d4c;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Added justify-content: center */
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ececec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the text content within the container */
+    max-width: 400px; /* Limit the maximum width for better readability */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+h1 {
+    text-align: center;
+    color: #142d4c; /* Set the title color */
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 34px; /* Increase font size for emphasis */
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #000000;
+    font-size: 12px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto; /* Center the input field horizontally within the container */
+    text-align: center;
+}
+
+button {
+    padding: 12px 24px; /* Adjust padding for better button size */
+    background-color: #385170;
+    color: #FFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition for smoother hover effect */
+}
+
+button:hover {
+    background-color: #9fd3c7;
+}
+
+.logout-button {
+    padding: 10px 20px; /* Adjusted padding for a different look */
+    background-color: #385170; /* Orange background color */
+    color: #FFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px; /* Adjusted position to be at the top */
+    right: 20px; /* Adjusted position to be at the right */
+    text-decoration: none; /* Remove underlines */
+}
+
+.logout-button:hover {
+    background-color: #9fd3c7; /* Darker orange on hover */
+}
+
+.header {
+    display: flex;
+    justify-content: center; /* Align items to the start and end of the container */
+    align-items: center; /* Center vertically */
+    margin-bottom: 20px;
+}
+
+.container2 {
+    background-color: #ececec;
+    padding: 80px; /* Increase padding for more space */
+    border-radius: 8px; 
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-height: 120vh; /* Set max height to 100% of viewport height */
+    overflow-y: auto;
+    width: 80%; /* Adjusted width for increased breadth */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+h2 {
+    color: #142d4c;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 34px; /* Increase font size for emphasis */
+}
+
+nav {
+    display: flex;
+    flex-direction: row; /* Arrange items vertically */
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items to the start (left) */
+    margin-top: 20px; /* Add margin for spacing */
+    text-align: center; 
+}
+
+nav a {
+    display: inline-block; 
+    padding: 10px 20px; /* Adjust padding for spacing */
+    margin-bottom: 10px; /* Add margin between links */
+    background-color: #385170;
+    color: #FFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underlines */
+}
+
+nav a:hover {
+    background-color: #9fd3c7; /* Darker orange on hover */
+}
+
+.justified-container {
+    display: grid;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #142d4c;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-align: left;
+}
+
+.company-details {
+    background-color: #ececec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.company-details p {
+    margin: 5px 0;
+    text-align: left;
+}
+
+.company-details strong {
+    color: #142d4c; 
+    font-weight: bold;
+}
+
+.info-label {
+    font-weight: bold;
+    min-width: 100px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label1 {
+    font-weight: bold;
+    min-width: 140px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label2 {
+    font-weight: bold;
+    min-width: 260px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label3 {
+    font-weight: bold;
+    min-width: 275px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label4 {
+    font-weight: bold;
+    min-width: 165px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label5 {
+    font-weight: bold;
+    min-width: 570px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label6 {
+    font-weight: bold;
+    min-width: 245px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label7 {
+    font-weight: bold;
+    min-width: 180px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label8 {
+    font-weight: bold;
+    min-width: 225px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-label9 {
+    font-weight: bold;
+    min-width: 135px;
+    display: inline-block;
+    text-align: left;
+}
+
+.info-value {
+    flex-grow: 1;
+    text-align: justify;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.desc-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.desc-label {
+    font-weight: bold;
+    min-width: 105px; /* Set a fixed minimum width for all labels */
+    display: inline-block; /* Ensure that the label takes up its specified width */
+    text-align: left; /* Align the text to the left */
+}
+
+.desc-label2 {
+    font-weight: bold;
+    min-width: 140px; /* Set a fixed minimum width for all labels */
+    display: inline-block; /* Ensure that the label takes up its specified width */
+    text-align: left; /* Align the text to the left */
+}
+
+.desc-value {
+    flex-grow: 1; /* Allow the description text to grow and fill available space */
+    text-align: justify; /* Justify the text */
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/* Define styles for the custom table */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Define styles for the table header */
+.custom-table th {
+    background-color: #385170; /* Header filled with #385170 */
+    color: white; /* White text */
+    border: 1px solid #dddddd; /* Gray border */
+    padding: 8px; /* Padding */
+    text-align: left; /* Left-align text */
+    line-height: 1.5;
+}
+
+/* Define styles for the table rows */
+.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row background color */
+    border: 1px solid #dddddd; /* Gray border */
+}
+
+.custom-table tr:nth-child(odd) {
+    background-color: #ffffff; /* Default row background color */
+    border: 1px solid #dddddd; /* Gray border */
+}
+
+/* Define styles for the table data */
+.custom-table td {
+    padding: 8px; /* Padding */
+    text-align: left; /* Left-align text */
+}
+
+.header2 {
+    display: flex;
+    justify-content: flex-start; /* Center the contents horizontally */
+    align-items: center;
+}
+
+#label-value {
+    color: #000000;
+    font-size: 14px;
+    width: auto;
+    margin: 0px 20px 0px 0px; 
+}
+
+.slider-value {
+    color: #000000;
+    font-size: 14px;
+    width: 100px;
+    margin: 0px 20px 0px 0px; 
+}
+
+.time_period_slider {
+    width: 400px; /* Set the width */
+    margin: 0px 20px 0px 0px;
+}
+
+input[type="range"] {
+    background-color: #9fd3c7; /* Set the background color */
+}
+
+.generate-chart-button {
+    padding: 12px 24px; /* Adjust padding for desired size */
+    background-color: #385170; /* Custom background color */
+    color: #FFF; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Add border radius for rounded corners */
+    cursor: pointer; /* Set cursor to pointer */
+    transition: background-color 0.3s, color 0.3s; /* Add transition for smoother hover effect */
+    margin: 0px 0px 20px 0px;
+}
+
+.generate-chart-button:hover {
+    background-color: #9fd3c7; 
+}
+
+.header3 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-end; 
+    align-items: flex-end; 
+    position: absolute;
+    top: 265px; 
+    right: 20px; 
+}
+
+.annual-button,
+.quarterly-button {
+    display: block; 
+    padding: 10px 20px; 
+    background-color: #385170; 
+    font-size: 16px;
+    color: #FFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 1px;
+    text-decoration: none; 
+    width: 100px; 
+    box-sizing: border-box; 
+    text-align: center; 
+}
+
+.annual-button:hover,
+.quarterly-button:hover {
+    background-color: #9fd3c7; 
+}
+
+.plot-container {
+    margin-top: 10px;
+    margin-left: auto; 
+    margin-right: auto; 
+    display: inline-block; 
+}
+
+.header4 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-end; 
+    position: absolute;
+    top: 1643px; 
+    right: 240px; 
+}
+
+.header5 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-end; 
+    position: absolute;
+    top: 2198px; 
+    right: 240px; 
+}
+
+.header6 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-end; 
+    position: absolute;
+    top: 2753px; 
+    right: 240px; 
+}
+
+.news-details {
+    background-color: #ececec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0px 0px 10px 0px;
+}
+
+.news-details p {
+    margin: 5px 0;
+    text-align: left;
+}
+
+.news-details strong {
+    color: #142d4c; 
+    font-weight: bold;
+}
+
+.info-value2 {
+    padding: 5px 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.positive {
+    background-color: #86efac;
+    color: black;
+}
+
+.negative {
+    background-color: #fca5a5;
+    color: black;
+}
+
+.neutral {
+    background-color: #d1d5db;
+    color: black;
+}

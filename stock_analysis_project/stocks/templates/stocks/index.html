@@ -1,0 +1,29 @@
+<!-- stocks/templates/stocks/index.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>StockTriad Analytics</h1>
+
+        <form method="POST" class="form-container">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="label">Enter Stock Symbol:</label>
+                <input type="text" id="symbol" name="symbol" required>
+            </div>
+
+            <div class="input-group">
+                <button type="submit" class="generate-data-button">Generate Data</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

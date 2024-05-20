@@ -1,0 +1,79 @@
+<!-- stocks/templates/stocks/profile.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>{{ company_info.name }}</h3>
+            <div class="company-details">
+                <p><span class="info-label">Address:</span> <span class="info-value">{{ company_info.address }}</span></p>
+                <p><span class="info-label">Phone:</span> <span class="info-value">{{ company_info.phone }}</span></p>
+                <p><span class="info-label">Website:</span> <span class="info-value"><a href="{{ company_info.website }}">{{ company_info.website }}</a></span></p>
+                <p><span class="info-label">Exchange:</span> <span class="info-value">{{ company_info.exchange }}</span></p>
+                <p><span class="info-label">Currency:</span> <span class="info-value">{{ company_info.currency }}</span></p>
+                <p><span class="info-label">Employees:</span> <span class="info-value">{{ company_info.employees }}</span></p>
+                <p><span class="info-label">Timezone:</span> <span class="info-value">{{ company_info.timezone }}</span></p>
+                <p><span class="info-label">Industry:</span> <span class="info-value">{{ company_info.industry }}</span></p>
+                <p><span class="info-label">Sector:</span> <span class="info-value">{{ company_info.sector }}</span></p>
+                <div class="desc-container">
+                    <span class="desc-label">Description:</span>
+                    <span class="desc-value">{{ company_info.description }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Key Executives</h3>
+            <div class = 'company-details'>
+                {% if officers_table is not None and not officers_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in officers_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in officers_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No company officers available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

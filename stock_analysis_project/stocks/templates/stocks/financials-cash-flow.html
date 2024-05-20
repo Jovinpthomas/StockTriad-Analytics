@@ -1,0 +1,196 @@
+<!-- stocks/templates/stocks/financials-cash-flow.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials_balance_sheet">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <nav>
+            <a href="/financials-balance-sheet"         class="financials_balance_sheet">Balance Sheet</a>
+            <a href="/financials-income-statement"      class="financials_income_statement">Income Statement</a>
+            <a href="/financials-cash-flow"              class="financials_cash_flow">Cash Flow</a>
+        </nav>
+        
+        <div class="header3">
+            <form id="financials-form" method="post" action="{% url 'financials_cash_flow' %}">
+                {% csrf_token %}
+                <button type="submit" class="annual-button" name="action" value="annual">Annual</button>
+                <button type="submit" class="quarterly-button" name="action" value="quarterly">Quarterly</button>
+            </form>
+        </div>
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Cash Flow - {{ period }}</h3>
+            <div class="company-details">                  
+                {% if main_components_table is not None and not main_components_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in main_components_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in main_components_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No main components available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Cash Flow From Operations (CFO)</h3>
+            <div class="company-details">                  
+                {% if cfo_table is not None and not cfo_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in cfo_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in cfo_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No cash flow from operations available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Cash Flow From Investing (CFI)</h3>
+            <div class="company-details">                  
+                {% if cfi_table is not None and not cfi_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in cfi_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in cfi_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No cash flow from investing available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Cash Flow From Financing (CFF)</h3>
+            <div class="company-details">                  
+                {% if cff_table is not None and not cff_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in cff_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in cff_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No cash flow from financing available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>End Cash Position</h3>
+            <div class="company-details">                  
+                {% if ecp_table is not None and not ecp_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in ecp_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in ecp_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No end cash position available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

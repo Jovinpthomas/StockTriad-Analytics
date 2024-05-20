@@ -1,0 +1,200 @@
+<!-- stocks/templates/stocks/peers.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>Peers</h3>
+            <div class = 'company-details'>
+                {% if peer_table is not None and not peer_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in peer_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in peer_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No peers available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Valuation Metrics</h3>
+            <div class = 'company-details'>
+                {% if valuation_metrics_table is not None and not valuation_metrics_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in valuation_metrics_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in valuation_metrics_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No valuation metrics available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Profitability Metrics</h3>
+            <div class = 'company-details'>
+                {% if profitability_metrics_table is not None and not profitability_metrics_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in profitability_metrics_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in profitability_metrics_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No profitability metrics available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Leverage Metrics</h3>
+            <div class = 'company-details'>
+                {% if leverage_metrics_table is not None and not leverage_metrics_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in leverage_metrics_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in leverage_metrics_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No leverage metrics available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Risk Metrics</h3>
+            <div class = 'company-details'>
+                {% if risk_metrics_table is not None and not risk_metrics_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in risk_metrics_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in risk_metrics_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No risk metrics available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Expected Annual Growth Rates</h3>
+            <div class = 'company-details'>
+                {% if growth_rates_table is not None and not growth_rates_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in growth_rates_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in growth_rates_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No growth rates available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

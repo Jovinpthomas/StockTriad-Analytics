@@ -1,0 +1,69 @@
+<!-- stocks/templates/stocks/risks.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>Market Volatility and Performance</h3>
+            <div class="company-details">
+                <p><span class="info-label7">Beta:</span> <span class="info-value2">{{ market_volatility_and_performance.beta }}</span></p>
+                <p><span class="info-label7">52-Week Change:</span> <span class="info-value2">{{ market_volatility_and_performance.52_week_change }}</span></p>
+                <p><span class="info-label7">S&P 52-Week Change:</span> <span class="info-value2">{{ market_volatility_and_performance.sandp_52_week_change }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Short Interest and Ownership</h3>
+            <div class="company-details">
+                <p><span class="info-label3">Short Percent of Float:</span> <span class="info-value">{{ short_interest_and_ownership.short_percent_of_float }}</span></p>
+                <p><span class="info-label3">Shares Short:</span> <span class="info-value">{{ short_interest_and_ownership.shares_short }}</span></p>
+                <p><span class="info-label3">Shares Percent Shares Out:</span> <span class="info-value">{{ short_interest_and_ownership.shares_percent_shares_out }}</span></p>
+                <p><span class="info-label3">Shares Short Prior Month:</span> <span class="info-value">{{ short_interest_and_ownership.shares_short_prior_month }}</span></p>
+                <p><span class="info-label3">Shares Short Prior Month Date:</span> <span class="info-value">{{ short_interest_and_ownership.shares_short_prior_month_date }}</span></p>
+                <p><span class="info-label3">Shares Short Previous Month Date:</span> <span class="info-value">{{ short_interest_and_ownership.shares_short_previous_month_date }}</span></p>
+                <p><span class="info-label3">Held Percent Insiders:</span> <span class="info-value">{{ short_interest_and_ownership.held_percent_insiders }}</span></p>
+                <p><span class="info-label3">Held Percent Institutions:</span> <span class="info-value">{{ short_interest_and_ownership.held_percent_institutions }}</span></p>
+                <p><span class="info-label3">Institutional Ownership:</span> <span class="info-value">{{ short_interest_and_ownership.institutional_ownership }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Governance and Audit Risk</h3>
+            <div class="company-details">
+                <p><span class="info-label2">Governance Epoch Date:</span> <span class="info-value">{{ governance_and_audit_risk.governance_epoch_date }}</span></p>
+                <p><span class="info-label2">Compensation As Of Epoch Date:</span> <span class="info-value">{{ governance_and_audit_risk.compensation_as_of_epoch_date }}</span></p>
+                <p><span class="info-label2">Audit Risk:</span> <span class="info-value">{{ governance_and_audit_risk.audit_risk }}</span></p>
+                <p><span class="info-label2">Board Risk:</span> <span class="info-value">{{ governance_and_audit_risk.board_risk }}</span></p>
+                <p><span class="info-label2">Compensation Risk:</span> <span class="info-value">{{ governance_and_audit_risk.compensation_risk }}</span></p>
+                <p><span class="info-label2">Shareholder Rights Risk:</span> <span class="info-value">{{ governance_and_audit_risk.shareholder_rights_risk }}</span></p>
+                <p><span class="info-label2">Overall Risk:</span> <span class="info-value">{{ governance_and_audit_risk.overall_risk }}</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

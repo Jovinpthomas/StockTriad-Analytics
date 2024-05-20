@@ -1,0 +1,226 @@
+<!-- stocks/templates/stocks/financials-balance-sheet.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials_balance_sheet">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <nav>
+            <a href="/financials-balance-sheet"         class="financials_balance_sheet">Balance Sheet</a>
+            <a href="/financials-income-statement"      class="financials_income_statement">Income Statement</a>
+            <a href="/financials-cash-flow"              class="financials_cash_flow">Cash Flow</a>
+        </nav>
+        
+        <div class="header3">
+            <form id="financials-form" method="post" action="{% url 'financials_balance_sheet' %}">
+                {% csrf_token %}
+                <button type="submit" class="annual-button" name="action" value="annual">Annual</button>
+                <button type="submit" class="quarterly-button" name="action" value="quarterly">Quarterly</button>
+            </form>
+        </div>
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Balance Sheet - {{ period }}</h3>
+            <div class="company-details">                  
+                {% if main_components_table is not None and not main_components_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in main_components_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in main_components_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No main components available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Current Assets</h3>
+            <div class="company-details">                  
+                {% if current_assets_table is not None and not current_assets_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in current_assets_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in current_assets_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No current assets available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Non Current Assets</h3>
+            <div class="company-details">                  
+                {% if long_term_assets_table is not None and not long_term_assets_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in long_term_assets_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in long_term_assets_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No non current assets available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Current Liabilities</h3>
+            <div class="company-details">                  
+                {% if current_liabilities_table is not None and not current_liabilities_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in current_liabilities_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in current_liabilities_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No current liabilities available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Non Current Liabilities</h3>
+            <div class="company-details">                  
+                {% if long_term_liabilities_table is not None and not long_term_liabilities_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in long_term_liabilities_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in long_term_liabilities_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No non current liabilities available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if period == "Annual" or period == "Quarterly" %}
+        <div class="justified-container">
+            <h3>Shareholder Equity</h3>
+            <div class="company-details">                  
+                {% if stockholders_equity_table is not None and not stockholders_equity_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in stockholders_equity_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in stockholders_equity_table.rows %}
+                            <tr class="{% cycle 'even' 'odd' %}">
+                                {% for item in row %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No shareholder equity available</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

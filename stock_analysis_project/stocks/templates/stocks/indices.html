@@ -1,0 +1,144 @@
+<!-- stocks/templates/stocks/indices.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>Indices</h3>
+            <div class = 'company-details'>
+                {% if indices_table is not None and not indices_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in indices_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in indices_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No indices available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Performance Metrics</h3>
+            <div class = 'company-details'>
+                {% if performance_metrics_table is not None and not performance_metrics_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in performance_metrics_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in performance_metrics_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No performance metrics available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Market Metrics</h3>
+            <div class = 'company-details'>
+                {% if market_metrics_table is not None and not market_metrics_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in market_metrics_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in market_metrics_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No market metrics available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Simple Moving Averages</h3>
+            <div class = 'company-details'>
+                {% if sma_table is not None and not sma_table.empty %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            {% for header in sma_table.field_names %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in sma_table.rows %}
+                        <tr class="{% cycle 'even' 'odd' %}">
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No Simple Moving Averages available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

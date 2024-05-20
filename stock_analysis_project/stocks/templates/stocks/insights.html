@@ -1,0 +1,116 @@
+<!-- stocks/templates/stocks/insights.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>Basic Information</h3>
+            <div class="company-details">
+                <p><span class="info-label1">Market Cap:</span> <span class="info-value2">{{ basic_information.market_cap }}</span></p>
+                <p><span class="info-label1">Previous Close:</span> <span class="info-value2">{{ basic_information.previous_close }}</span></p>
+                <p><span class="info-label1">Current Price:</span> <span class="info-value2">{{ basic_information.current_price }}</span></p>
+                <p><span class="info-label1">52-Week Range:</span> <span class="info-value2">{{ basic_information.fifty_two_week_range }}</span></p>
+                <p><span class="info-label1">Average Volume:</span> <span class="info-value2">{{ basic_information.average_volume }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Dividends and Splits</h3>
+            <div class="company-details">
+                <p><span class="info-label2">Dividend Rate:</span> <span class="info-value">{{ dividends_and_splits.dividend_rate }}</span></p>
+                <p><span class="info-label2">Payout Ratio:</span> <span class="info-value">{{ dividends_and_splits.payout_ratio }}</span></p>
+                <p><span class="info-label2">Dividend Yield:</span> <span class="info-value">{{ dividends_and_splits.dividend_yield }}</span></p>
+                <p><span class="info-label2">Last Dividend Value:</span> <span class="info-value">{{ dividends_and_splits.last_dividend_value }}</span></p>
+                <p><span class="info-label2">Ex-Dividend Date:</span> <span class="info-value">{{ dividends_and_splits.ex_dividend_date }}</span></p>
+                <p><span class="info-label2">Last Split Factor:</span> <span class="info-value">{{ dividends_and_splits.last_split_factor }}</span></p>
+                <p><span class="info-label2">Last Split Date:</span> <span class="info-value">{{ dividends_and_splits.last_split_date }}</span></p>
+                <p><span class="info-label2">Last Dividend Date: </span> <span class="info-value">{{ dividends_and_splits.last_dividend_date }}</span></p>
+                <p><span class="info-label2">Five Year Average Dividend Yield:</span> <span class="info-value">{{ dividends_and_splits.five_year_average_dividend_yield }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Earnings and Revenue</h3>
+            <div class="company-details">
+                <p><span class="info-label3">Trailing EPS (Earnings Per Share):</span> <span class="info-value">{{ earnings_and_revenue.trailing_eps }}</span></p>
+                <p><span class="info-label3">Forward EPS (Earnings Per Share):</span> <span class="info-value">{{ earnings_and_revenue.forward_eps }}</span></p>
+                <p><span class="info-label3">Total Revenue:</span> <span class="info-value">{{ earnings_and_revenue.total_revenue }}</span></p>
+                <p><span class="info-label3">Earnings Growth:</span> <span class="info-value">{{ earnings_and_revenue.earnings_growth }}</span></p>
+                <p><span class="info-label3">Earnings Quarterly Growth:</span> <span class="info-value">{{ earnings_and_revenue.earnings_quarterly_growth }}</span></p>
+                <p><span class="info-label3">Revenue Growth:</span> <span class="info-value">{{ earnings_and_revenue.revenue_growth }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Ratios and Margins</h3>
+            <div class="company-details">
+                <p><span class="info-label4">Trailing P/E Ratio:</span> <span class="info-value">{{ ratios_and_margins.trailing_pe_ratio }}</span></p>
+                <p><span class="info-label4">Forward P/E Ratio:</span> <span class="info-value">{{ ratios_and_margins.forward_pe_ratio }}</span></p>
+                <p><span class="info-label4">Profit Margins:</span> <span class="info-value">{{ ratios_and_margins.profit_margins }}</span></p>
+                <p><span class="info-label4">Return on Equity:</span> <span class="info-value">{{ ratios_and_margins.return_on_equity }}</span></p>
+                <p><span class="info-label4">Return on Assets:</span> <span class="info-value">{{ ratios_and_margins.return_on_assets }}</span></p>
+                <p><span class="info-label4">Debt-to-Equity Ratio:</span> <span class="info-value">{{ ratios_and_margins.debt_to_equity_ratio }}</span></p>
+                <p><span class="info-label4">Gross Margins:</span> <span class="info-value">{{ ratios_and_margins.gross_margins }}</span></p>
+                <p><span class="info-label4">EBITDA Margins:</span> <span class="info-value">{{ ratios_and_margins.ebitda_margins }}</span></p>
+                <p><span class="info-label4">Operating Margins:</span> <span class="info-value">{{ ratios_and_margins.operating_margins }}</span></p>
+                <p><span class="info-label4">Trailing PEG Ratio:</span> <span class="info-value">{{ ratios_and_margins.trailing_peg_ratio }}</span></p>
+                <p><span class="info-label4">PEG Ratio:</span> <span class="info-value">{{ ratios_and_margins.peg_ratio }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Cash Flow and Enterprise Value</h3>
+            <div class="company-details">
+                <p><span class="info-label5">Total Cash:</span> <span class="info-value">{{ cash_flow_and_enterprise_value.total_cash }}</span></p>
+                <p><span class="info-label5">Free Cash Flow:</span> <span class="info-value">{{ cash_flow_and_enterprise_value.free_cash_flow }}</span></p>
+                <p><span class="info-label5">EBITDA (Earnings Before Interest, Taxes, Depreciation, and Amortization):</span> <span class="info-value">{{ cash_flow_and_enterprise_value.ebitda }}</span></p>
+                <p><span class="info-label5">Operating Cash Flow:</span> <span class="info-value">{{ cash_flow_and_enterprise_value.operating_cash_flow }}</span></p>
+                <p><span class="info-label5">Enterprise Value:</span> <span class="info-value">{{ cash_flow_and_enterprise_value.enterprise_value }}</span></p>
+                <p><span class="info-label5">Enterprise to Revenue Ratio:</span> <span class="info-value">{{ cash_flow_and_enterprise_value.enterprise_to_revenue_ratio }}</span></p>
+                <p><span class="info-label5">Enterprise to EBITDA Ratio:</span> <span class="info-value">{{ cash_flow_and_enterprise_value.enterprise_to_ebitda_ratio }}</span></p>
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Other Metrics</h3>
+            <div class="company-details">
+                <p><span class="info-label6">Book Value:</span> <span class="info-value">{{ other_metrics.book_value }}</span></p>
+                <p><span class="info-label6">Price-to-Book (P/B) Ratio:</span> <span class="info-value">{{ other_metrics.price_to_book_ratio }}</span></p>
+                <p><span class="info-label6">Revenue Per Share:</span> <span class="info-value">{{ other_metrics.revenue_per_share }}</span></p>
+                <p><span class="info-label6">Total Cash Per Share:</span> <span class="info-value">{{ other_metrics.total_cash_per_share }}</span></p>
+                <p><span class="info-label6">Average Daily Volume 10-Day:</span> <span class="info-value">{{ other_metrics.average_daily_volume_10_day }}</span></p>
+                <p><span class="info-label6">Regular Market Volume:</span> <span class="info-value">{{ other_metrics.regular_market_volume }}</span></p>
+                <p><span class="info-label6">Regular Market Day Low:</span> <span class="info-value">{{ other_metrics.regular_market_day_low }}</span></p>
+                <p><span class="info-label6">Regular Market Day High:</span> <span class="info-value">{{ other_metrics.regular_market_day_high }}</span></p>
+                <p><span class="info-label6">Regular Market Open:</span> <span class="info-value">{{ other_metrics.regular_market_open }}</span></p>
+                <p><span class="info-label6">Regular Market Previous Close:</span> <span class="info-value">{{ other_metrics.regular_market_previous_close }}</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

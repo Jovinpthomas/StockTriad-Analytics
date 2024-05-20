@@ -1,0 +1,10 @@
+django==5.0.6
+pandas==2.2.2
+yfinance==0.2.38
+plotly==5.22.0
+requests==2.31.0
+prettytable==3.10.0
+newspaper3k==0.2.8
+nltk==3.8.1
+textblob==0.18.0.post0
+lxml==5.2.2

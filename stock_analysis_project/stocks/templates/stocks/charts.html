@@ -1,0 +1,275 @@
+<!-- stocks/templates/stocks/charts.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stocks/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container2">
+        <div class="header">
+            <h2>StockTriad Analytics</h2>
+            <a href="{% url 'clear_session' %}" class="logout-button">Logout</a> 
+        </div>
+
+        <nav>
+            <a href="/profile"                      class="profile" >Profile</a>
+            <a href="/charts"                       class="charts">Charts</a>
+            <a href="/news"                         class="news">News</a>
+            <a href="/insights"                     class="insights">Insights</a>
+            <a href="/analysts"                     class="analysts">Analysts</a>
+            <a href="/risks"                        class="risks">Risks</a>
+            <a href="/financials-balance-sheet"     class="financials">Financials</a>
+            <a href="/holders"                      class="holders">Holders</a>
+            <a href="/peers"                        class="peers">Peers</a>
+            <a href="/indices"                      class="indices">Indices</a>
+        </nav>
+
+        <div class="justified-container">
+            <h3>Stock Price Chart</h3>
+            <div class="company-details">
+                <header class="header2">
+                    <label id="label-value">Select Time Period:</label>
+                    <input type="range" id="time_period_slider_1" class="time_period_slider" min="1" max="8" step="1" value="1">
+                    <span id="slider-value_1" class="slider-value">1 day</span>
+                    <form id="generate-stock-price-chart-form" method="post" action="{% url 'charts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="stock_price">
+                        <input type="hidden" id="selected-time-period_1" class="selected_time_period" name="selected_time_period_1" value="1d">
+                        <input type="hidden" id="selected-slider-value_1" class="selected_slider_value" name="selected_slider_value_1" value="1 day">
+                        <button type="submit" class="generate-chart-button">Generate Chart</button>
+                    </form>
+                </header>
+                
+                {% if plot1_html %}
+                <div class="plot-container">
+                    {{ plot1_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Stock and Peer Price Percentage Change Chart</h3>
+            <div class="company-details">
+                <header class="header2">
+                    <label id="label-value">Select Time Period:</label>
+                    <input type="range" id="time_period_slider_2" class="time_period_slider" min="1" max="8" step="1" value="1">
+                    <span id="slider-value_2" class="slider-value">1 day</span>
+                    <form id="generate-peer-price-percentage-change-chart-form" method="post" action="{% url 'charts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="peer_price_percentage_change">
+                        <input type="hidden" id="selected-time-period_2" class="selected_time_period" name="selected_time_period_2" value="1d">
+                        <input type="hidden" id="selected-slider-value_2" class="selected_slider_value" name="selected_slider_value_2" value="1 day"> 
+                        <button type="submit" class="generate-chart-button">Generate Chart</button>
+                    </form>
+                </header>
+                
+                {% if plot2_html %}
+                <div class="plot-container">
+                    {{ plot2_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="justified-container">
+            <h3>Stock and Index Price Percentage Change Chart</h3>
+            <div class="company-details">
+                <header class="header2">
+                    <label id="label-value">Select Time Period:</label>
+                    <input type="range" id="time_period_slider_3" class="time_period_slider" min="1" max="8" step="1" value="1">
+                    <span id="slider-value_3" class="slider-value">1 day</span>
+                    <form id="generate-index-price-percentage-change-chart-form" method="post" action="{% url 'charts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="index_price_percentage_change">
+                        <input type="hidden" id="selected-time-period_3" class="selected_time_period" name="selected_time_period_3" value="1d">
+                        <input type="hidden" id="selected-slider-value_3" class="selected_slider_value" name="selected_slider_value_3" value="1 day"> 
+                        <button type="submit" class="generate-chart-button">Generate Chart</button>
+                    </form>
+                </header>
+                
+                {% if plot3_html %}
+                <div class="plot-container">
+                    {{ plot3_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Simple Moving Averages Chart</h3>
+            <div class="company-details">
+                <header class="header2">
+                    <label id="label-value">Select Time Period:</label>
+                    <input type="range" id="time_period_slider_4" class="time_period_slider" min="1" max="3" step="1" value="1">
+                    <span id="slider-value_4" class="slider-value">Daily</span>
+                    <form id="generate-simple-moving-averages-chart-form" method="post" action="{% url 'charts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="simple_moving_averages_chart">
+                        <input type="hidden" id="selected-time-period_4" class="selected_time_period" name="selected_time_period_4" value="daily">
+                        <input type="hidden" id="selected-slider-value_4" class="selected_slider_value" name="selected_slider_value_4" value="Daily"> 
+                        <button type="submit" class="generate-chart-button">Generate Chart</button>
+                    </form>
+                </header>
+                
+                {% if plot4_html %}
+                <div class="plot-container">
+                    {{ plot4_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Bollinger Bands Chart</h3>
+            <div class="company-details">
+                <header class="header2">
+                    <label id="label-value">Select Time Period:</label>
+                    <input type="range" id="time_period_slider_5" class="time_period_slider" min="1" max="3" step="1" value="1">
+                    <span id="slider-value_5" class="slider-value">Daily</span>
+                    <form id="generate-bollinger-bands-chart-form" method="post" action="{% url 'charts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="bollinger_bands_chart">
+                        <input type="hidden" id="selected-time-period_5" class="selected_time_period" name="selected_time_period_5" value="daily">
+                        <input type="hidden" id="selected-slider-value_5" class="selected_slider_value" name="selected_slider_value_5" value="Daily"> 
+                        <button type="submit" class="generate-chart-button">Generate Chart</button>
+                    </form>
+                </header>
+                
+                {% if plot5_html %}
+                <div class="plot-container">
+                    {{ plot5_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="justified-container">
+            <h3>Relative Strength Index Chart</h3>
+            <div class="company-details">
+                <header class="header2">
+                    <label id="label-value">Select Time Period:</label>
+                    <input type="range" id="time_period_slider_6" class="time_period_slider" min="1" max="3" step="1" value="1">
+                    <span id="slider-value_6" class="slider-value">Daily</span>
+                    <form id="generate-relative-strength-index-chart-form" method="post" action="{% url 'charts' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="chart_type" value="relative_strength_index_chart">
+                        <input type="hidden" id="selected-time-period_6" class="selected_time_period" name="selected_time_period_6" value="day">
+                        <input type="hidden" id="selected-slider-value_6" class="selected_slider_value" name="selected_slider_value_6" value="Daily"> 
+                        <button type="submit" class="generate-chart-button">Generate Chart</button>
+                    </form>
+                </header>
+                
+                {% if plot6_html %}
+                <div class="plot-container">
+                    {{ plot6_html|safe }}
+                </div>
+                {% else %}
+                    <p>No plot available.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <script>
+            function initializeSlider1(sliderId, sliderValueId, selectedTimePeriodInputId, selectedSliderValueInputId) {
+                const slider = document.getElementById(sliderId); 
+                const sliderValue = document.getElementById(sliderValueId); 
+                const selectedTimePeriodInput = document.getElementById(selectedTimePeriodInputId); 
+                const selectedSliderValueInput = document.getElementById(selectedSliderValueInputId); 
+                const labels = ["1 day", "5 days", "1 month", "6 months", "year to date", "1 year", "5 years", "max"];
+                const periodValues = ["1d", "5d", "1mo", "6mo", "ytd", "1y", "5y", "max"];
+                
+                if (slider && sliderValue && selectedTimePeriodInput && selectedSliderValueInput) { 
+                    slider.addEventListener('input', () => {
+                        const selectedDays = parseInt(slider.value, 10);
+                        const selectedTimePeriod = periodValues[selectedDays - 1];
+                        sliderValue.textContent = labels[selectedDays - 1];
+                        
+                        selectedTimePeriodInput.value = selectedTimePeriod;
+                        selectedSliderValueInput.value = labels[selectedDays - 1];
+                        
+                        console.log('Selected time period:', selectedTimePeriod);
+                        console.log('Selected Slider value:', labels[selectedDays - 1]);
+                    });
+                } else {
+                    console.error("One or more elements not found in the DOM.");
+                }
+            }
+
+            function initializeSlider2(sliderId, sliderValueId, selectedTimePeriodInputId, selectedSliderValueInputId) {
+                const slider = document.getElementById(sliderId); 
+                const sliderValue = document.getElementById(sliderValueId); 
+                const selectedTimePeriodInput = document.getElementById(selectedTimePeriodInputId); 
+                const selectedSliderValueInput = document.getElementById(selectedSliderValueInputId);
+                const labels = ["Daily", "Weekly", "Monthly"];
+                const periodValues = ["daily", "weekly", "monthly"];
+                
+                if (slider && sliderValue && selectedTimePeriodInput && selectedSliderValueInput) { 
+                    slider.addEventListener('input', () => {
+                        const selectedDays = parseInt(slider.value, 10);
+                        const selectedTimePeriod = periodValues[selectedDays - 1];
+                        sliderValue.textContent = labels[selectedDays - 1];
+                        
+                        selectedTimePeriodInput.value = selectedTimePeriod;
+                        selectedSliderValueInput.value = labels[selectedDays - 1];
+                        
+                        console.log('Selected time period:', selectedTimePeriod);
+                        console.log('Selected Slider value:', labels[selectedDays - 1]);
+                    });
+                } else {
+                    console.error("One or more elements not found in the DOM.");
+                }
+            }
+
+            function initializeSlider3(sliderId, sliderValueId, selectedTimePeriodInputId, selectedSliderValueInputId) {
+                const slider = document.getElementById(sliderId); 
+                const sliderValue = document.getElementById(sliderValueId); 
+                const selectedTimePeriodInput = document.getElementById(selectedTimePeriodInputId); 
+                const selectedSliderValueInput = document.getElementById(selectedSliderValueInputId); 
+                const labels = ["Daily", "Weekly", "Monthly"];
+                const periodValues = ['day', 'week', 'month'];
+                
+                if (slider && sliderValue && selectedTimePeriodInput && selectedSliderValueInput) { 
+                    slider.addEventListener('input', () => {
+                        const selectedDays = parseInt(slider.value, 10);
+                        const selectedTimePeriod = periodValues[selectedDays - 1];
+                        sliderValue.textContent = labels[selectedDays - 1];
+                        
+                        selectedTimePeriodInput.value = selectedTimePeriod;
+                        selectedSliderValueInput.value = labels[selectedDays - 1];
+                        
+                        console.log('Selected time period:', selectedTimePeriod);
+                        console.log('Selected Slider value:', labels[selectedDays - 1]);
+                    });
+                } else {
+                    console.error("One or more elements not found in the DOM.");
+                }
+            }
+
+            initializeSlider1('time_period_slider_1', 'slider-value_1', 'selected-time-period_1', 'selected-slider-value_1');
+            initializeSlider1('time_period_slider_2', 'slider-value_2', 'selected-time-period_2', 'selected-slider-value_2');
+            initializeSlider1('time_period_slider_3', 'slider-value_3', 'selected-time-period_3', 'selected-slider-value_3');
+
+            initializeSlider2('time_period_slider_4', 'slider-value_4', 'selected-time-period_4', 'selected-slider-value_4');
+            initializeSlider2('time_period_slider_5', 'slider-value_5', 'selected-time-period_5', 'selected-slider-value_5');
+            
+            initializeSlider3('time_period_slider_6', 'slider-value_6', 'selected-time-period_6', 'selected-slider-value_6');
+        </script>
+    </div>
+</body>
+</html>
